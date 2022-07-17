@@ -4,5 +4,6 @@ from . import views
 
 app_name = 'crud'
 urlpatterns = [
-    path('',views.AllView.as_view(),name='all')
+    path('',views.AllView.as_view(),name='all'),
+    path('<int:pk>/',views.DetailView.as_view(),name='detail')
 ]

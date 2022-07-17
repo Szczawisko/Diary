@@ -9,3 +9,7 @@ class AllView(generic.ListView):
     model = Diary
     def get_queryset(self):
         return Diary.objects.order_by('-pub_date')
+
+class DetailView(generic.DetailView):
+    template_name = 'crud/detail.html'
+    model = Diary
