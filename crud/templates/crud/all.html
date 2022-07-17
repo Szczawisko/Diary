@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% if diary_list %}
+    <ul>
+        {% for entry in diary_list %}
+            <h2>{{ entry.title }}</h2>
+            Date published: {{entry.pub_date}}<br/>
+            {{entry.body}}
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No entries are available</p>
+{% endif %}
+
+
+
+{% endblock content %}
