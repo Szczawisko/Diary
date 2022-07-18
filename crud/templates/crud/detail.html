@@ -6,7 +6,7 @@
     <br/>
     {{diary.body}}
     </br></br>
-    Edit
+    <a href="{% url 'crud:update' diary.id %}">Edit<a/>
     |
-    Delete
+    <a href="{% url 'crud:delete' diary.id %}">Delete</a>
 {% endblock content %}

@@ -73,3 +73,4 @@ apps/users/migrations/0*
 db.sqlite3
 
 *.txt
+.vscode
