@@ -72,5 +72,5 @@ apps/users/migrations/0*
 .env
 db.sqlite3
 
-*.txt
+mysql_docker.txt
 .vscode
