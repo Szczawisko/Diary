@@ -7,6 +7,7 @@ from django.views import generic
 
 from .models import Diary
 
+
 class AllView(generic.ListView):
     template_name = 'crud/all.html'
     model = Diary

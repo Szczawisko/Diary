@@ -10,8 +10,13 @@ services:
       - MYSQL_DATABASE=diary
 
   web:
-    build: .
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    image: karczoch/diary
+    environment:
+      - DBNAME=diary
+      - DBUSER=root
+      - DBPASSWORD=123456
+      - DBHOST=db
+      - DBPORT=3306
     volumes:
       - .:/site/
     ports:

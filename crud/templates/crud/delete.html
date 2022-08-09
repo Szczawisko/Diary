@@ -5,6 +5,6 @@
         <p>Are you sure you want to delete "{{object.title}}"?</P>
         {{form}}
         <input type="submit" value="Confirm">
-        <a href="{% url 'crud:detail' object.id %}">Cancel</a>
+        <a href="{% url 'entries:detail' object.id %}">Cancel</a>
     </form>
 {% endblock content %}

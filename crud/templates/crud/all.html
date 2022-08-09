@@ -5,7 +5,7 @@
 {% if diary_list %}
 
     {% for entry in diary_list %}
-        <h2><a href="{% url 'crud:detail' entry.id %}">{{ entry.title }}</a></h2>
+        <h2><a href="{% url 'entries:detail' entry.id %}">{{ entry.title }}</a></h2>
         Date published: {{entry.pub_date}}
     {% endfor %}
 

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+from os import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,11 +79,11 @@ WSGI_APPLICATION = 'diary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'diary',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': 'db',
-        'PORT': '3306',
+        'NAME': environ['DBNAME'],
+        'USER': environ['DBUSER'],
+        'PASSWORD': environ['DBPASSWORD'],
+        'HOST': environ['DBHOST'],
+        'PORT': environ['DBPORT'],
     }
 }
 
