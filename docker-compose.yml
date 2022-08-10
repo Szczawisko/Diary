@@ -10,7 +10,7 @@ services:
       - MYSQL_DATABASE=diary
 
   web:
-    image: karczoch/diary
+    build: .
     environment:
       - DBNAME=diary
       - DBUSER=root
