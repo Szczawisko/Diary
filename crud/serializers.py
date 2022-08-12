@@ -5,4 +5,4 @@ from .models import Diary
 class DiarySerialaizer(serializers.ModelSerializer):
     class Meta:
         model = Diary
-        fields = ["title","body","pub_date"]
+        fields = ["id","title","body","pub_date"]
