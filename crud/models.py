@@ -6,6 +6,7 @@ class Diary(models.Model):
     pub_date = models.DateTimeField('date published',auto_now=True)
     title = models.CharField(max_length=255)
     body = models.TextField()
+    version = models.IntegerField(default=1)
     #user = models.ForeignKey(User,on_delete = models.CASCADE, blank = True, null = True)
 
     def __str__(self):

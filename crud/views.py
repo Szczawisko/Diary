@@ -3,8 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
 
+from rest_framework_condition import etag
+
 from .models import Diary
 from .serializers import DiarySerialaizer
+
+def etag_func(request,id):
+	entrie = Diary.objects.get(id=id)
+	return str(entrie.version)
 
 class DiaryListApiView(APIView):
 
@@ -34,10 +40,11 @@ class DiaryDetailApiView(APIView):
 		except Diary.DoesNotExist:
 			return None
 
+	@etag(etag_func)
 	def get(self, request, id,*args, **kwargs):
 		entrie = self.get_object(id)
 		if not entrie:
-			return Response({"res": "Object with entrie id does not exist"}, status =status.HTTP_400_BAD_REQUEST)
+			return Response({"res": "Object with entrie id does not exist"}, status =status.HTTP_404_NOT_FOUND)
 
 		serialaizer = DiarySerialaizer(entrie)
 		return Response(serialaizer.data,status=status.HTTP_200_OK)
@@ -45,7 +52,10 @@ class DiaryDetailApiView(APIView):
 	def put(self, request, id,*args, **kwargs):
 		entrie = self.get_object(id)
 		if not entrie:
-			return Response({"res": "Object with entrie id does not exist"}, status =status.HTTP_400_BAD_REQUEST)
+			return Response({"res": "Object with entrie id does not exist"}, status =status.HTTP_404_NOT_FOUND)
+
+		if request.headers.get("If-Match")!=etag_func(request,id):
+			return Response({"res": "ETag value is not the same "},status=status.HTTP_412_PRECONDITION_FAILED)
 
 		data = {
 			'title': request.data.get('title') if request.data.get('title')!=None else entrie.title,
@@ -62,7 +72,7 @@ class DiaryDetailApiView(APIView):
 	def delete(self, request, id,*args, **kwargs):
 		entrie = self.get_object(id)
 		if not entrie:
-			return Response({"res": "Object with entrie id does not exist"}, status =status.HTTP_400_BAD_REQUEST)
+			return Response({"res": "Object with entrie id does not exist"}, status =status.HTTP_404_NOT_FOUND)
 		entrie.delete()
 		return Response({"res":"Object deleted!"},status=status.HTTP_200_OK)
 
